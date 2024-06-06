@@ -1,5 +1,8 @@
 package br.com.alura.screenmatch.main;
 
+import br.com.alura.screenmatch.model.Title;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -22,6 +25,11 @@ public class MainWithSearch {
         HttpResponse<String> response = client
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+        String json = response.body();
+        System.out.println(json);
+
+        Gson gson = new Gson();
+        Title myTitle = gson.fromJson(json, Title.class);
+        System.out.println("Title: " + myTitle.getName());
     }
 }
