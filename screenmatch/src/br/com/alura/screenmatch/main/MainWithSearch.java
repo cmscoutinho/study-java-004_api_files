@@ -1,6 +1,5 @@
 package br.com.alura.screenmatch.main;
 
-import br.com.alura.screenmatch.exception.YearConversionException;
 import br.com.alura.screenmatch.model.Title;
 import br.com.alura.screenmatch.model.TitleOmdb;
 import com.google.gson.FieldNamingPolicy;
@@ -20,7 +19,7 @@ public class MainWithSearch {
         System.out.print("Which movie do you want to search?: ");
         var query = scanner.next();
 
-        String queryURL = "http://www.omdbapi.com/?t=" + query.replace(" ", "+") + "&apikey=337e4e55";
+        String queryURL = "http://www.omdbapi.com/?t=" + query + "&apikey=337e4e55";
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -47,8 +46,6 @@ public class MainWithSearch {
         } catch (IllegalArgumentException e) {
             System.out.println("Error! Please check the URI.");
             System.out.println("Detailed error: " + e.getMessage());
-        } catch (YearConversionException e) {
-            System.out.println("Unknown Year format!");
         }
 
         System.out.println("The program ended succesfully!");
