@@ -4,14 +4,9 @@ import com.google.gson.Gson;
 import ex_03_10.ex_03.exception.GitHubQueryErrorException;
 import ex_03_10.ex_03.model.GitHubUser;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -22,11 +17,12 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Search user: ");
-        String user = scanner.next();
+        String user = scanner.nextLine();
 
         final String baseUri = "https://api.github.com/users/";
-        final String uri = baseUri + user;
+        final String uri = baseUri + URLEncoder.encode(user, "UTF-8");
 
+        System.out.println(uri);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(uri))
