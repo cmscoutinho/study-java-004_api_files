@@ -4,8 +4,14 @@ import com.google.gson.Gson;
 import ex_03_10.ex_03.exception.GitHubQueryErrorException;
 import ex_03_10.ex_03.model.GitHubUser;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -36,10 +42,8 @@ public class Main {
                 throw new GitHubQueryErrorException("User not found!");
             }
             System.out.println(userObj);
-
         } catch (GitHubQueryErrorException e) {
             System.out.println(e.getMessage());
         }
-
     }
 }
