@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -17,10 +18,11 @@ import java.util.Scanner;
 public class MainWithSearch {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Which movie do you want to search?: ");
-        var query = scanner.next();
 
-        String queryURL = "http://www.omdbapi.com/?t=" + query + "&apikey=337e4e55";
+        System.out.print("Which movie do you want to search?: ");
+        var query = scanner.nextLine();
+
+        String queryURL = "http://www.omdbapi.com/?t=" + URLEncoder.encode(query, "UTF-8") + "&apikey=337e4e55";
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
