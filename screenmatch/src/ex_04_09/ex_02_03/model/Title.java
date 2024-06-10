@@ -1,4 +1,4 @@
-package ex_04_09.ex_02.model;
+package ex_04_09.ex_02_03.model;
 
 public class Title {
     private String name;

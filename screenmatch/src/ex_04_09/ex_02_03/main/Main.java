@@ -1,9 +1,9 @@
-package ex_04_09.ex_02.main;
+package ex_04_09.ex_02_03.main;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ex_04_09.ex_02.model.Title;
+import ex_04_09.ex_02_03.model.Title;
 
 import java.io.FileWriter;
 import java.io.IOException;
