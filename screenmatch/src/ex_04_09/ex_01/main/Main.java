@@ -1,6 +1,6 @@
-package ex_09.ex_01.main;
+package ex_04_09.ex_01.main;
 
-import ex_09.ex_01.model.SimpleMessageWriter;
+import ex_04_09.ex_01.model.SimpleMessageWriter;
 
 import java.io.IOException;
 
