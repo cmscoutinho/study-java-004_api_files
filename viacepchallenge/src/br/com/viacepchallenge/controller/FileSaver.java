@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileSaver {
 
     private static final String fileName = "queries.txt";
-    private static final String filePath = "src/resources/" + fileName;
+    private static final String filePath = "resources/" + fileName;
 
     public static void saveFile(Address address) throws IOException {
         FileWriter writer = new FileWriter(filePath);

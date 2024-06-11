@@ -29,5 +29,7 @@ public class Main {
                 }
             }
         } while (query != null);
+
+        System.out.println("Thanks for using ViaCEP Challenge!");
     }
 }
