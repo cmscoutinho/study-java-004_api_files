@@ -10,7 +10,6 @@ import java.net.http.HttpResponse;
 
 public class HttpConnection {
     private final String BASE_URL = "http://viacep.com.br/ws/$query/json/";
-    private String query;
     private String fullURL;
 
     HttpRequest request;
@@ -18,9 +17,8 @@ public class HttpConnection {
     HttpClient client;
 
     public HttpConnection(String query) {
-        this.query = query.replace("-", "");
 
-        if (this.query.length() != 8) {
+        if (query.length() != 8) {
             throw new InvalidCepException("The CEP address must have 8 digits!");
         }
 

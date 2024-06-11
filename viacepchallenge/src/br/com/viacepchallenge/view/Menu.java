@@ -12,7 +12,8 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Which CEP (ZIP) code do you want to search? (\"0\" to exit): ");
-        String query = scanner.nextLine();
+        String query = scanner.nextLine().replace("-", "");;
+
         if (query.equals("0")) {
             return null;
         } else {
