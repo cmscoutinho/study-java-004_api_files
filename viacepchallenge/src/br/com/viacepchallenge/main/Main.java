@@ -6,11 +6,14 @@ import br.com.viacepchallenge.model.Address;
 import br.com.viacepchallenge.view.Menu;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
         String query;
+        List<Address> queriesJsonList = new ArrayList<>();
 
         Menu menu = new Menu();
         menu.welcome();
@@ -21,8 +24,9 @@ public class Main {
                 Address address = CepSearch.checkCEP(query);
                 if (address != null) {
                     System.out.println(address);
+                    queriesJsonList.add(address);
                     try {
-                        FileSaver.saveFile(address);
+                        FileSaver.saveFile(queriesJsonList);
                     } catch (IOException e) {
                         System.out.println("Error: " + e.getMessage());
                     }

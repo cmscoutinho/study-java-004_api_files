@@ -1,5 +1,13 @@
-Street: Passagem São Pedro
+[Street: Avenida Almirante Tamandaré
+District: Campina
+City: Belém
+State: PA
+ZIP Code: 66023-000, Street: Alameda Terceira
+District: Castanheira
+City: Belém
+State: PA
+ZIP Code: 66645-150, Street: Passagem São Pedro
 District: Atalaia
 City: Ananindeua
 State: PA
-ZIP Code: 67013-710
+ZIP Code: 67013-710]
