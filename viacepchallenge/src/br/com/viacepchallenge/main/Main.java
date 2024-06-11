@@ -14,9 +14,9 @@ public class Main {
         try {
             connection = new HttpConnection(query);
         } catch (IOException e) {
-            System.out.println("Invalid query! Try again!");
+            System.out.println("Invalid query! Try again! Error: " + e.getMessage());
         } catch (InterruptedException e) {
-            System.out.println("Connection to the remote host failed!");
+            System.out.println("Connection to the remote host failed! Error: " + e.getMessage());
         }
 
         System.out.println(connection.getJson());
