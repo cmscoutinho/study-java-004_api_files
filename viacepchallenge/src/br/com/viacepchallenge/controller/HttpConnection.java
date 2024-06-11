@@ -25,10 +25,7 @@ public class HttpConnection {
         try {
             fullURL = BASE_URL.replace("$query", query);
 
-            request = HttpRequest
-                    .newBuilder()
-                    .uri(URI.create(fullURL))
-                    .build();
+            request = HttpRequest.newBuilder().uri(URI.create(fullURL)).build();
             client = HttpClient.newHttpClient();
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {

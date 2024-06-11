@@ -1,11 +1,8 @@
 package br.com.viacepchallenge.main;
 
 import br.com.viacepchallenge.controller.CepSearch;
-import br.com.viacepchallenge.controller.HttpConnection;
 import br.com.viacepchallenge.model.Address;
 import br.com.viacepchallenge.view.Menu;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +16,9 @@ public class Main {
             query = menu.read();
             if (query != null) {
                 Address address = CepSearch.checkCEP(query);
-                System.out.println(address);
+                if (address != null) {
+                    System.out.println(address);
+                }
             }
         } while (query != null);
     }
