@@ -1,6 +1,9 @@
 package br.com.viacepchallenge.main;
 
 import br.com.viacepchallenge.controller.HttpConnection;
+import br.com.viacepchallenge.model.Address;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
@@ -18,6 +21,10 @@ public class Main {
             System.out.println("Connection to the remote host failed! Error: " + e.getMessage());
         }
 
-        System.out.println(connection.getJson());
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        Address address = gson.fromJson(connection.getJson(), Address.class);
+        System.out.println(address);
     }
 }
