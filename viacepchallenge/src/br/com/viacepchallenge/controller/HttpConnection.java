@@ -24,7 +24,6 @@ public class HttpConnection {
         }
 
         baseURL = baseURL.replace("$query", query);
-        System.out.println(baseURL);
 
         request = HttpRequest
                 .newBuilder()

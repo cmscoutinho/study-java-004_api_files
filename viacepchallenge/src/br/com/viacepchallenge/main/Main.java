@@ -3,7 +3,6 @@ package br.com.viacepchallenge.main;
 import br.com.viacepchallenge.controller.HttpConnection;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) {
