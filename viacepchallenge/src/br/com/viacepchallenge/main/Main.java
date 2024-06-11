@@ -12,14 +12,7 @@ public class Main {
 
         String query = "67013710";
 
-        HttpConnection connection = null;
-        try {
-            connection = new HttpConnection(query);
-        } catch (IOException e) {
-            System.out.println("Invalid query! Try again! Error: " + e.getMessage());
-        } catch (InterruptedException e) {
-            System.out.println("Connection to the remote host failed! Error: " + e.getMessage());
-        }
+        HttpConnection connection = new HttpConnection(query);
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()

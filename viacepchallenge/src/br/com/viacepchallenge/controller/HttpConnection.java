@@ -9,31 +9,39 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class HttpConnection {
-    private String baseURL = "http://viacep.com.br/ws/$query/json/";
+    private final String BASE_URL = "http://viacep.com.br/ws/$query/json/";
     private String query;
+    private String fullURL;
 
     HttpRequest request;
     HttpResponse response;
     HttpClient client;
 
-    public HttpConnection(String query) throws IOException, InterruptedException {
+    public HttpConnection(String query) {
         this.query = query.replace("-", "");
 
         if (this.query.length() != 8) {
             throw new InvalidCepException("The CEP address must have 8 digits!");
         }
 
-        baseURL = baseURL.replace("$query", query);
+        try {
+            fullURL = BASE_URL.replace("$query", query);
 
-        request = HttpRequest
-                .newBuilder()
-                .uri(URI.create(baseURL))
-                .build();
-        client = HttpClient.newHttpClient();
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            request = HttpRequest
+                    .newBuilder()
+                    .uri(URI.create(fullURL))
+                    .build();
+            client = HttpClient.newHttpClient();
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            System.out.println("Invalid query! Try again! Error: " + e.getMessage());
+        } catch (InterruptedException e) {
+            System.out.println("Connection to the remote host failed! Error: " + e.getMessage());
+        }
     }
 
     public String getJson() {
         return response.body().toString();
     }
+
 }
