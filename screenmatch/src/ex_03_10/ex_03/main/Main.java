@@ -3,6 +3,7 @@ package ex_03_10.ex_03.main;
 import com.google.gson.Gson;
 import ex_03_10.ex_03.exception.GitHubQueryErrorException;
 import ex_03_10.ex_03.model.GitHubUser;
+import ex_03_10.ex_03.view.MainWindow;
 
 import java.io.IOException;
 import java.net.URI;
@@ -41,5 +42,7 @@ public class Main {
         } catch (GitHubQueryErrorException e) {
             System.out.println(e.getMessage());
         }
+
+        MainWindow mainWindow = new MainWindow();
     }
 }

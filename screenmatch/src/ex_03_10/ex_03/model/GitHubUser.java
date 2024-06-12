@@ -1,6 +1,6 @@
 package ex_03_10.ex_03.model;
 
-public record GitHubUser(String login, String bio, int public_repos, String avatarUrl) {
+public record GitHubUser(String login, String bio, int public_repos, String avatar_url) {
     @Override
     public String toString() {
         return """

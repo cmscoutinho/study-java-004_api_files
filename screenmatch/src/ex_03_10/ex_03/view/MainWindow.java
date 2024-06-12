@@ -1,12 +1,27 @@
 package ex_03_10.ex_03.view;
 
+import com.google.gson.Gson;
+import ex_03_10.ex_03.exception.GitHubQueryErrorException;
+import ex_03_10.ex_03.model.GitHubUser;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class MainWindow extends JFrame {
 
@@ -21,6 +36,8 @@ public class MainWindow extends JFrame {
 
     private JButton queryButton;
 
+    private JLabel avatarLabel;
+
     public MainWindow() {
         this.setTitle(TITLE);
 
@@ -34,6 +51,8 @@ public class MainWindow extends JFrame {
 
         queryButton = new JButton("Search");
 
+        avatarLabel = new JLabel();
+
         // Components configuration
         queryField.setForeground(Color.lightGray);
         queryField.setToolTipText("Github username");
@@ -46,15 +65,46 @@ public class MainWindow extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-                queryField.setText("Github username");
-                queryField.setForeground(Color.lightGray);
+                if (queryField.getText().equals("")) {
+                    queryField.setText("Github username");
+                    queryField.setForeground(Color.lightGray);
+                }
             }
         });
 
+        queryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String user = queryField.getText();
+
+                final String baseUri = "https://api.github.com/users/";
+                final String uri;
+                try {
+                    uri = baseUri + URLEncoder.encode(user, "UTF-8");
+
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                    String json = response.body();
+
+                    Gson gson = new Gson();
+                    GitHubUser userObj = gson.fromJson(json, GitHubUser.class);
+                    if (userObj.login() == null) {
+                        throw new GitHubQueryErrorException("User not found!");
+                    }
+                    BufferedImage bi = ImageIO.read(new URL(userObj.avatar_url()));
+                    avatarLabel.setIcon(new ImageIcon(bi));
+                } catch (IOException | InterruptedException | GitHubQueryErrorException ex) {
+                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                }
+
+            }
+        });
 
         // Panel configuration
         mainPanel.setLayout(new BorderLayout(10, 10));
-        mainPanel.setBorder(new EmptyBorder(10,10,10,10));
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         queryPanel.setPreferredSize(new Dimension(460 + 460 / 2, 50));
         avatarPanel.setPreferredSize(new Dimension(460, 460));
@@ -73,6 +123,8 @@ public class MainWindow extends JFrame {
         // Components inclusion
         queryPanel.add(queryField);
         queryPanel.add(queryButton);
+
+        avatarPanel.add(avatarLabel);
 
         this.add(mainPanel);
 
