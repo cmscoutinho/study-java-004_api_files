@@ -2,6 +2,7 @@ package ex_03_10.ex_03.view;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
@@ -23,7 +24,8 @@ public class MainWindow extends JFrame {
         avatarPanel = new JPanel();
         infoPanel = new JPanel();
 
-        mainPanel.setLayout(new BorderLayout(20, 20));
+        mainPanel.setLayout(new BorderLayout(10, 10));
+        mainPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         queryPanel.setPreferredSize(new Dimension(460 + 460 / 2, 50));
         avatarPanel.setPreferredSize(new Dimension(460, 460));
