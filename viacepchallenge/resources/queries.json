@@ -1,0 +1,25 @@
+[{
+  "logradouro": "Avenida Almirante Tamandaré",
+  "bairro": "Campina",
+  "localidade": "Belém",
+  "uf": "PA",
+  "cep": "66023-000"
+},{
+  "logradouro": "Alameda Terceira",
+  "bairro": "Castanheira",
+  "localidade": "Belém",
+  "uf": "PA",
+  "cep": "66645-150"
+},{
+  "logradouro": "Passagem São Pedro",
+  "bairro": "Atalaia",
+  "localidade": "Ananindeua",
+  "uf": "PA",
+  "cep": "67013-710"
+},{
+  "logradouro": "Rodovia BR-230",
+  "bairro": "Nova Marabá",
+  "localidade": "Marabá",
+  "uf": "PA",
+  "cep": "68507-765"
+}]
