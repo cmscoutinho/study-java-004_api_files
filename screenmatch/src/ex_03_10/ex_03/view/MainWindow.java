@@ -39,6 +39,12 @@ public class MainWindow extends JFrame {
     private JLabel avatarLabel;
 
     public MainWindow() {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            System.out.println("Look and feel error: " + e.getMessage());
+        }
+
         this.setTitle(TITLE);
 
         // Components initialization
@@ -111,9 +117,9 @@ public class MainWindow extends JFrame {
 
         avatarPanel.setLayout(new BorderLayout());
 
-        queryPanel.setPreferredSize(new Dimension(460 + 460 / 2, 50));
-        avatarPanel.setPreferredSize(new Dimension(460, 460));
-        infoPanel.setPreferredSize(new Dimension(460 / 2, 460));
+        queryPanel.setPreferredSize(new Dimension(465 + 460 / 2, 50));
+        avatarPanel.setPreferredSize(new Dimension(465, 465));
+        infoPanel.setPreferredSize(new Dimension(460 / 2, 465));
 
 //        avatarPanel.s
 
