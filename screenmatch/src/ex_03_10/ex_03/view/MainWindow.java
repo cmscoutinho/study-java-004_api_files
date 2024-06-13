@@ -102,13 +102,20 @@ public class MainWindow extends JFrame {
             }
         });
 
+        avatarLabel.setVerticalAlignment(SwingConstants.TOP);
+        avatarLabel.setVerticalTextPosition(SwingConstants.TOP);
+
         // Panel configuration
         mainPanel.setLayout(new BorderLayout(10, 10));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
+        avatarPanel.setLayout(new BorderLayout());
+
         queryPanel.setPreferredSize(new Dimension(460 + 460 / 2, 50));
         avatarPanel.setPreferredSize(new Dimension(460, 460));
         infoPanel.setPreferredSize(new Dimension(460 / 2, 460));
+
+//        avatarPanel.s
 
         // Border configuration
         Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
