@@ -38,7 +38,10 @@ public class MainWindow extends JFrame {
 
     private JLabel avatarLabel;
     private JLabel userNameLabel;
+    private JLabel nameLabel;
     private JLabel bioLabel;
+    private JLabel companyLabel;
+    private JLabel locationLabel;
     private JLabel publicReposLabel;
 
 
@@ -64,7 +67,10 @@ public class MainWindow extends JFrame {
 
         avatarLabel = new JLabel();
         userNameLabel = new JLabel();
+        nameLabel = new JLabel();
         bioLabel = new JLabel();
+        companyLabel = new JLabel();
+        locationLabel = new JLabel();
         publicReposLabel = new JLabel();
 
         // Components configuration
@@ -111,7 +117,10 @@ public class MainWindow extends JFrame {
                     BufferedImage bi = ImageIO.read(new URL(userObj.avatar_url()));
                     avatarLabel.setIcon(new ImageIcon(bi));
                     userNameLabel.setText(userObj.login());
-                    bioLabel.setText(userObj.bio());
+                    nameLabel.setText(userObj.name());
+                    bioLabel.setText("<html>" + userObj.bio() + "</html>");
+                    companyLabel.setText("<html>" + userObj.company() + "</html>");
+                    locationLabel.setText("<html>" + userObj.location() + "</html>");
                     publicReposLabel.setText(String.valueOf(userObj.public_repos()));
                 } catch (IOException | InterruptedException | GitHubQueryErrorException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
@@ -141,7 +150,10 @@ public class MainWindow extends JFrame {
         infoPanel.setBorder(border);
 
         userNameLabel.setBorder(BorderFactory.createTitledBorder("Username"));
+        nameLabel.setBorder(BorderFactory.createTitledBorder("Name"));
         bioLabel.setBorder(BorderFactory.createTitledBorder("Bio"));
+        companyLabel.setBorder(BorderFactory.createTitledBorder("Company"));
+        locationLabel.setBorder(BorderFactory.createTitledBorder("Location"));
         publicReposLabel.setBorder(BorderFactory.createTitledBorder("Public repos"));
 
         // Components inclusion
@@ -154,12 +166,24 @@ public class MainWindow extends JFrame {
         userNameLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 50));
         userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
+        infoPanel.add(nameLabel);
+        nameLabel.setPreferredSize(new Dimension(nameLabel.getParent().getPreferredSize().width-30, 50));
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         infoPanel.add(bioLabel);
-        bioLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 100));
+        bioLabel.setPreferredSize(new Dimension(bioLabel.getParent().getPreferredSize().width-30, 100));
         bioLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
+        infoPanel.add(companyLabel);
+        companyLabel.setPreferredSize(new Dimension(companyLabel.getParent().getPreferredSize().width-30, 50));
+        companyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        infoPanel.add(locationLabel);
+        locationLabel.setPreferredSize(new Dimension(locationLabel.getParent().getPreferredSize().width-30, 50));
+        locationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         infoPanel.add(publicReposLabel);
-        publicReposLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 50));
+        publicReposLabel.setPreferredSize(new Dimension(publicReposLabel.getParent().getPreferredSize().width-30, 50));
         publicReposLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         mainPanel.add(queryPanel, BorderLayout.NORTH);
