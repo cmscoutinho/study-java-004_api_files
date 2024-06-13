@@ -37,11 +37,16 @@ public class MainWindow extends JFrame {
     private JButton queryButton;
 
     private JLabel avatarLabel;
+    private JLabel userNameLabel;
+    private JLabel bioLabel;
+    private JLabel publicReposLabel;
+
 
     public MainWindow() {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
             System.out.println("Look and feel error: " + e.getMessage());
         }
 
@@ -58,6 +63,9 @@ public class MainWindow extends JFrame {
         queryButton = new JButton("Search");
 
         avatarLabel = new JLabel();
+        userNameLabel = new JLabel();
+        bioLabel = new JLabel();
+        publicReposLabel = new JLabel();
 
         // Components configuration
         queryField.setForeground(Color.lightGray);
@@ -77,6 +85,7 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+        queryField.setHorizontalAlignment(SwingConstants.CENTER);
 
         queryButton.addActionListener(new ActionListener() {
             @Override
@@ -101,6 +110,9 @@ public class MainWindow extends JFrame {
                     }
                     BufferedImage bi = ImageIO.read(new URL(userObj.avatar_url()));
                     avatarLabel.setIcon(new ImageIcon(bi));
+                    userNameLabel.setText(userObj.login());
+                    bioLabel.setText(userObj.bio());
+                    publicReposLabel.setText(String.valueOf(userObj.public_repos()));
                 } catch (IOException | InterruptedException | GitHubQueryErrorException ex) {
                     JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
                 }
@@ -108,36 +120,51 @@ public class MainWindow extends JFrame {
             }
         });
 
-        avatarLabel.setVerticalAlignment(SwingConstants.TOP);
-        avatarLabel.setVerticalTextPosition(SwingConstants.TOP);
-
         // Panel configuration
         mainPanel.setLayout(new BorderLayout(10, 10));
-        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         avatarPanel.setLayout(new BorderLayout());
+        infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        queryPanel.setPreferredSize(new Dimension(465 + 460 / 2, 50));
+        queryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+
+
+        queryPanel.setPreferredSize(new Dimension(465 + 460 / 2, 60));
         avatarPanel.setPreferredSize(new Dimension(465, 465));
         infoPanel.setPreferredSize(new Dimension(460 / 2, 465));
 
-//        avatarPanel.s
-
         // Border configuration
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
         queryPanel.setBorder(border);
         avatarPanel.setBorder(border);
         infoPanel.setBorder(border);
 
-        mainPanel.add(queryPanel, BorderLayout.NORTH);
-        mainPanel.add(avatarPanel, BorderLayout.WEST);
-        mainPanel.add(infoPanel, BorderLayout.EAST);
+        userNameLabel.setBorder(BorderFactory.createTitledBorder("Username"));
+        bioLabel.setBorder(BorderFactory.createTitledBorder("Bio"));
+        publicReposLabel.setBorder(BorderFactory.createTitledBorder("Public repos"));
 
         // Components inclusion
         queryPanel.add(queryField);
         queryPanel.add(queryButton);
 
         avatarPanel.add(avatarLabel);
+
+        infoPanel.add(userNameLabel);
+        userNameLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 50));
+        userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        infoPanel.add(bioLabel);
+        bioLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 100));
+        bioLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        infoPanel.add(publicReposLabel);
+        publicReposLabel.setPreferredSize(new Dimension(userNameLabel.getParent().getPreferredSize().width-30, 50));
+        publicReposLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        mainPanel.add(queryPanel, BorderLayout.NORTH);
+        mainPanel.add(avatarPanel, BorderLayout.WEST);
+        mainPanel.add(infoPanel, BorderLayout.EAST);
 
         this.add(mainPanel);
 
